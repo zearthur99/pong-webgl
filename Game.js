@@ -8,7 +8,7 @@ export default class Game {
     setInterval(() => {
       this.renderer.drawScene();
       this.processTick();
-    }, 1000 / 30);
+    }, 1000 / 2);
   }
 
   processTick () {

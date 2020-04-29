@@ -1,6 +1,7 @@
 export default class Renderer {
 
   initGL(){
+    this.first = 0;
     this.canvas = document.getElementById("gameCanvas");
     this.gl = this.canvas.getContext("webgl") || this.canvas.getContext("experimental-webgl");
     this.gl.viewportWidth = this.canvas.width;
@@ -97,7 +98,11 @@ export default class Renderer {
   }
 
   drawScene() {
-    this.gl.clearColor(0.0, 0.0, 0.0, 1.0);  // Clear to black, fully opaque
+    this.first += 0.1;
+    if (this.first > 0.9) {
+      this.first = 0;
+    }
+    this.gl.clearColor(Math.random(), 0.0, 0.0, 1.0);  // Clear to black, fully opaque
     this.gl.clearDepth(1.0);                 // Clear everything
     this.gl.enable(this.gl.DEPTH_TEST);           // Enable depth testing
     this.gl.depthFunc(this.gl.LEQUAL);            // Near things obscure far things
@@ -147,7 +152,6 @@ export default class Renderer {
       const stride = 0;         // how many bytes to get from one set of values to the next
                                 // 0 = use type and numComponents above
       const offset = 0;         // how many bytes inside the buffer to start from
-      this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffers.position);
       this.gl.vertexAttribPointer(
         this.programInfo.attribLocations.vertexPosition,
         numComponents,
@@ -177,6 +181,7 @@ export default class Renderer {
     {
       const offset = 0;
       const vertexCount = 4;
+      this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffers.position);
       this.gl.drawArrays(this.gl.TRIANGLE_STRIP, offset, vertexCount);
     }
   }
