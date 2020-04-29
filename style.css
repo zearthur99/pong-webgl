@@ -45,8 +45,34 @@ body {
    border-right: dashed 4px white;
 }
 
-.gameOverContainer {
+.gameOverOverlay {
+   position: absolute;
+   top: calc(50% - 50px);
+   left: calc(50% - 130px);
+   bottom: 50%;
+   right: 50%;
+   text-transform: uppercase;
+   width: 260px;
+   height: 100px;
+   text-align: center;
+   background: black;
+   border: solid 2px white;
+}
 
+.gameOverText {
+   padding: 14px;
+   font-size: 12px;
+}
+
+button {
+   color: white;
+   background-color: black;
+   border: solid 2px white;
+   margin-top: 8px;
+   padding: 8px;
+   font-family: 'Press Start 2P', cursive;
+   text-transform: uppercase;
+   cursor: pointer;
 }
 
 .canvasWrapper {
