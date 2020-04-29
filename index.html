@@ -3,6 +3,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
     <title>WebGL Pong</title>
+    <script src="https://cdn.jsdelivr.net/npm/gl-matrix@3/gl-matrix.js"></script>
+    <script type="module" src="init.js"></script>
 </head>
 <body class="flexCenter">
     <div class="contentContainer">
@@ -13,7 +15,7 @@
         </div>
         <div class="gameContainer">
             <div class="canvasWrapper">
-                <canvas width="750" height="450"></canvas>
+                <canvas id="gameCanvas" width="750" height="450"></canvas>
             </div>
             <div class="verticalDivider"></div>
             <div class="gameOverOverlay pxl-border">
