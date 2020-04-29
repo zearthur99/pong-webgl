@@ -42,6 +42,8 @@ export default class Renderer {
     };
 
     this.buffers = this.initBuffers();
+    this.buffers2 = this.initBuffers2();
+
   }
 
   initBuffers() {
@@ -59,6 +61,25 @@ export default class Renderer {
     this.gl.bufferData(this.gl.ARRAY_BUFFER,
       new Float32Array(positions),
       this.gl.STATIC_DRAW);
+
+    return {
+      position: positionBuffer,
+    };
+  }
+
+  initBuffers2() {
+    const positionBuffer = this.gl.createBuffer();
+
+    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
+
+    const positions = [
+      -4.0,  3.0,
+      -3.0,  3.0,
+      -2.0, -2.0,
+      1.0, -1.0,
+    ];
+
+    this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(positions), this.gl.STATIC_DRAW);
 
     return {
       position: positionBuffer,
@@ -145,23 +166,7 @@ export default class Renderer {
 
     // Tell Webthis.gl how to pull out the positions from the position
     // buffer into the vertexPosition attribute.
-    {
-      const numComponents = 2;  // pull out 2 values per iteration
-      const type = this.gl.FLOAT;    // the data in the buffer is 32bit floats
-      const normalize = false;  // don't normalize
-      const stride = 0;         // how many bytes to get from one set of values to the next
-                                // 0 = use type and numComponents above
-      const offset = 0;         // how many bytes inside the buffer to start from
-      this.gl.vertexAttribPointer(
-        this.programInfo.attribLocations.vertexPosition,
-        numComponents,
-        type,
-        normalize,
-        stride,
-        offset);
-      this.gl.enableVertexAttribArray(
-        this.programInfo.attribLocations.vertexPosition);
-    }
+
 
     // Tell Webthis.gl to use our program when drawing
 
@@ -182,6 +187,41 @@ export default class Renderer {
       const offset = 0;
       const vertexCount = 4;
       this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffers.position);
+      {
+        const numComponents = 2;  // pull out 2 values per iteration
+        const type = this.gl.FLOAT;    // the data in the buffer is 32bit floats
+        const normalize = false;  // don't normalize
+        const stride = 0;         // how many bytes to get from one set of values to the next
+                                  // 0 = use type and numComponents above
+        const offset = 0;         // how many bytes inside the buffer to start from
+        this.gl.vertexAttribPointer(
+          this.programInfo.attribLocations.vertexPosition,
+          numComponents,
+          type,
+          normalize,
+          stride,
+          offset);
+        this.gl.enableVertexAttribArray(this.programInfo.attribLocations.vertexPosition);
+      }
+      this.gl.drawArrays(this.gl.TRIANGLE_STRIP, offset, vertexCount);
+
+      this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffers2.position);
+      {
+        const numComponents = 2;  // pull out 2 values per iteration
+        const type = this.gl.FLOAT;    // the data in the buffer is 32bit floats
+        const normalize = false;  // don't normalize
+        const stride = 0;         // how many bytes to get from one set of values to the next
+                                  // 0 = use type and numComponents above
+        const offset = 0;         // how many bytes inside the buffer to start from
+        this.gl.vertexAttribPointer(
+          this.programInfo.attribLocations.vertexPosition,
+          numComponents,
+          type,
+          normalize,
+          stride,
+          offset);
+        this.gl.enableVertexAttribArray(this.programInfo.attribLocations.vertexPosition);
+      }
       this.gl.drawArrays(this.gl.TRIANGLE_STRIP, offset, vertexCount);
     }
   }
