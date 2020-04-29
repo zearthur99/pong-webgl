@@ -1,0 +1,54 @@
+
+body {
+   background-color: black;
+   font-family: 'Press Start 2P', cursive;
+   color: white;
+   height: 100vh;
+   margin: 0;
+}
+
+.flexCenter {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.descriptionText {
+   font-size: 12px;
+   text-transform: uppercase;
+}
+
+.scoreNumber {
+   text-align: center;
+   font-size: 22px;
+}
+
+.gameContainer{
+   border: solid 3px white;
+   width: 750px;
+   height: 450px;
+   position: relative;
+}
+
+.topRow {
+   display: grid;
+   grid-template-columns: 40px auto 40px;
+   padding: 18px;
+}
+
+.verticalDivider {
+   width: 50%;
+   height: 100%;
+   position: absolute;
+   top: 0;
+   left: 0;
+   border-right: dashed 4px white;
+}
+
+.gameOverContainer {
+
+}
+
+.canvasWrapper {
+   position: relative;
+}
