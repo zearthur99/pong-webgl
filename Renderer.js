@@ -134,7 +134,7 @@ export default class Renderer {
   setRectangle(x, y, width, height) {
     const positionBuffer = this.gl.createBuffer();
     this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
-    
+
     var x1 = x;
     var x2 = x + width;
     var y1 = y;
