@@ -117,15 +117,15 @@ export default class Renderer {
 
   drawPaddles() {
     // Left paddle
-    this.setRectangle(-6.75, -0.75 + this.leftPaddle.getYPosition(), 0.15, 1.5);
-    this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
+    this.setRectangle(-6.75, -0.75 + this.leftPaddle.getYPosition(), 0.15, 1.5); // Defines the rectangle to be draw
+    this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4); // Draw the rectangle
     // Right paddle
     this.setRectangle(6.60, -0.75  + this.rightPaddle.getYPosition(), 0.15, 1.5);
     this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
   }
 
   drawBall() {
-
+    //TODO: Mostrar a bola usando setRectangle e gl.drawArrays
   }
 
   setRectangle(x, y, width, height) {
