@@ -57,6 +57,7 @@ body {
    text-align: center;
    background: black;
    border: solid 2px white;
+   opacity: 0;
 }
 
 .gameOverText {
