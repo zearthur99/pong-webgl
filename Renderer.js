@@ -1,7 +1,6 @@
 export default class Renderer {
 
   initGL(){
-    this.first = 0;
     this.canvas = document.getElementById("gameCanvas");
     this.gl = this.canvas.getContext("webgl") || this.canvas.getContext("experimental-webgl");
     this.gl.viewportWidth = this.canvas.width;
@@ -77,11 +76,7 @@ export default class Renderer {
   }
 
   drawScene() {
-    this.first += 0.1;
-    if (this.first > 0.9) {
-      this.first = 0;
-    }
-    this.gl.clearColor(Math.random(), 0.0, 0.0, 1.0);
+    this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
     this.gl.clearDepth(1.0);
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.depthFunc(this.gl.LEQUAL);
@@ -121,9 +116,11 @@ export default class Renderer {
   }
 
   drawPaddles() {
-    this.setRectangle(-6.75, -0.75, 0.15, 1.5);
+    // Left paddle
+    this.setRectangle(-6.75, -0.75 + this.leftPaddle.getYPosition(), 0.15, 1.5);
     this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
-    this.setRectangle(6.60, -0.75, 0.15, 1.5);
+    // Right paddle
+    this.setRectangle(6.60, -0.75  + this.rightPaddle.getYPosition(), 0.15, 1.5);
     this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4);
   }
 
@@ -163,4 +160,11 @@ export default class Renderer {
     this.gl.enableVertexAttribArray(this.programInfo.attribLocations.vertexPosition);
   }
 
+  setLeftPaddle(leftPaddle) {
+    this.leftPaddle = leftPaddle;
+  }
+
+  setRightPaddle(rightPaddle) {
+    this.rightPaddle = rightPaddle;
+  }
 }
