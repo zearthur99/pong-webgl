@@ -101,6 +101,7 @@ button {
    text-align: center;
    border-radius: 50%;
    font-size: 22px;
+   touch-action: manipulation;
 }
 
 .contentContainer {
