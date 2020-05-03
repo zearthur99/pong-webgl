@@ -22,6 +22,34 @@ export default class Paddle {
         this.direction=undefined;
       }
     });
+
+    if (player === 'left') {
+      document.getElementById('leftUp').addEventListener("touchstart", () => {
+        this.direction='up';
+      });
+      document.getElementById('leftDown').addEventListener("touchstart", () => {
+        this.direction='down';
+      });
+      document.getElementById('leftUp').addEventListener("touchend", () => {
+        this.direction=undefined;
+      });
+      document.getElementById('leftDown').addEventListener("touchend", () => {
+        this.direction=undefined;
+      });
+    } else if (player === 'right') {
+      document.getElementById('rightUp').addEventListener("touchstart", () => {
+        this.direction='up';
+      });
+      document.getElementById('rightDown').addEventListener("touchstart", () => {
+        this.direction='down';
+      });
+      document.getElementById('rightUp').addEventListener("touchend", () => {
+        this.direction=undefined;
+      });
+      document.getElementById('rightDown').addEventListener("touchend", () => {
+        this.direction=undefined;
+      });
+    }
   }
 
   checkKeys (player, testDirection, key) {
