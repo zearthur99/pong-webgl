@@ -5,23 +5,47 @@
     <title>WebGL Pong</title>
     <script src="https://cdn.jsdelivr.net/npm/gl-matrix@3/gl-matrix.js"></script>
     <script type="module" src="init.js"></script>
+    <meta charset="UTF-8">
 </head>
-<body class="flexCenter">
-    <div class="contentContainer">
-        <div class="topRow">
-            <div class="scoreNumber">7</div>
-            <div class="flexCenter descriptionText">First to score 10 points wins</div>
-            <div class="scoreNumber">1</div>
+<body class="flexCenter" onresize="processResize()">
+    <div id="gameContainer" class="contentContainer">
+        <div class="column">
+            <div class="button" id="leftUp">↑</div>
+            <div class="button" id="leftDown">↓</div>
         </div>
-        <div class="gameContainer">
-            <div class="canvasWrapper">
-                <canvas id="gameCanvas" width="750" height="450"></canvas>
+        <div class="column">
+            <div class="topRow">
+                <div class="scoreNumber" id="leftScore">0</div>
+                <div class="flexCenter descriptionText">First to score 5 points wins</div>
+                <div class="scoreNumber" id="rightScore">0</div>
             </div>
-            <div class="verticalDivider"></div>
-            <div class="gameOverOverlay pxl-border">
-                <div class="gameOverText">Game over</div>
-                <a href="index.html"><button>Play again</button></a>
+            <div class="gameContainer">
+                <div class="canvasWrapper">
+                    <canvas id="gameCanvas" width="750" height="450"></canvas>
+                </div>
+                <div class="verticalDivider"></div>
+                <div class="gameOverOverlay" style="display: none" id="gameOver">
+                    <div class="gameOverText">Game over</div>
+                    <a href="index.html"><button>Play again</button></a>
+                </div>
             </div>
+        </div>
+        <div class="column">
+            <div class="button" id="rightUp">↑</div>
+            <div class="button" id="rightDown">↓</div>
         </div>
     </div>
 </body>
+
+<script>
+  function processResize() {
+    let scale = Math.min(
+      window.innerWidth / 780,
+      window.innerHeight / 530
+    );
+    if (scale < 1) {
+      document.getElementById("gameContainer").style.transform = 'scale(' + scale + ')';
+    }
+  }
+  processResize();
+</script>

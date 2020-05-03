@@ -1,7 +1,11 @@
 import Renderer from "./Renderer.js";
 import Paddle from "./Paddle.js";
+import Ball from "./Ball.js";
 
 export default class Game {
+
+  leftScore = 0;
+  rightScore = 0;
 
   initGame() {
     this.renderer = new Renderer();
@@ -18,9 +22,16 @@ export default class Game {
 
     this.renderer.setRightPaddle(this.rightPaddle);
 
-    setInterval(() => {
+    this.ball = new Ball();
+    this.ball.initBall();
+    this.ball.setLeftPaddle(this.leftPaddle);
+    this.ball.setRightPaddle(this.rightPaddle);
+    this.ball.setGameReference(this);
+    this.renderer.setBall(this.ball);
+
+    this.gameLoop = setInterval(() => {
       game.processTick();
-    }, 1000 / 60);
+    }, 1000 /60);
   }
 
   processTick () {
@@ -31,5 +42,25 @@ export default class Game {
   processLogic() {
     this.leftPaddle.processGameTick();
     this.rightPaddle.processGameTick();
+    this.ball.processGameTick();
+  }
+
+  addRightScore () {
+    this.leftScore++;
+    this.checkEndOfGame();
+  }
+
+  addLeftScore() {
+    this.rightScore++;
+    this.checkEndOfGame();
+  }
+
+  checkEndOfGame() {
+    document.getElementById('rightScore').innerHTML = this.rightScore;
+    document.getElementById('leftScore').innerHTML = this.leftScore;
+    if (this.leftScore > 4 || this.rightScore > 4) {
+      document.getElementById('gameOver').style.display = 'block';
+      clearInterval(this.gameLoop);
+    }
   }
 }

@@ -5,7 +5,6 @@ export default class Renderer {
     this.gl = this.canvas.getContext("webgl") || this.canvas.getContext("experimental-webgl");
     this.gl.viewportWidth = this.canvas.width;
     this.gl.viewportHeight = this.canvas.height;
-    console.log({width: this.gl.viewportWidth, height: this.gl.viewportHeight});
     this.resolution = [this.canvas.width, this.canvas.height, 1.0];
 
     if (!this.gl) {
@@ -125,7 +124,8 @@ export default class Renderer {
   }
 
   drawBall() {
-    //TODO: Mostrar a bola usando setRectangle e gl.drawArrays
+    this.setRectangle(this.ball.getPosition().x, this.ball.getPosition().y, 0.15, 0.15); // Defines the rectangle to be draw
+    this.gl.drawArrays(this.gl.TRIANGLE_STRIP, 0, 4); // Draw the rectangle
   }
 
   setRectangle(x, y, width, height) {
@@ -145,11 +145,11 @@ export default class Renderer {
     ];
 
     this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(positions), this.gl.STATIC_DRAW);
-    var numComponents = 2;          // 2 components per iteration
-    var type = this.gl.FLOAT;   // the data is 32bit floats
-    var normalize = false; // don't normalize the data
-    var stride = 0;        // 0 = move forward size * sizeof(type) each iteration to get the next position
-    var offset = 0;        // start at the beginning of the buffer
+    let numComponents = 2;
+    let type = this.gl.FLOAT;
+    let normalize = false;
+    let stride = 0;
+    let offset = 0;
     this.gl.vertexAttribPointer(
       this.programInfo.attribLocations.vertexPosition,
       numComponents,
@@ -166,5 +166,9 @@ export default class Renderer {
 
   setRightPaddle(rightPaddle) {
     this.rightPaddle = rightPaddle;
+  }
+
+  setBall (ball) {
+    this.ball = ball;
   }
 }

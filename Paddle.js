@@ -1,11 +1,11 @@
-import Renderer from "./Renderer.js";
-
 export default class Paddle {
 
   maxYDistance = 3.5;
 
   initPaddle(player) {
     this.y=0; // 0 represents middle of the screen
+    this.player = player;
+
     document.addEventListener('keydown', (event) => {
       const keyName = event.key;
       if (this.checkKeys(player, 'up', keyName)) {
@@ -25,10 +25,6 @@ export default class Paddle {
   }
 
   checkKeys (player, testDirection, key) {
-    console.log({
-      player,
-      testDirection, key
-    })
     if (player === 'left' && testDirection === 'up' && (key === 'w' || key === 'W')) {
       return true;
     } else if (player === 'left' && testDirection === 'down' && (key === 's' || key === 'S')) {
@@ -56,7 +52,23 @@ export default class Paddle {
         this.y = newY;
       }
     }
-    console.log(this.y);
+  }
+
+  getCollisionBox() {
+    let screenY = this.y + 0.75;
+    if (this.player === 'left') {
+      return {
+        minY: screenY - 1.5,
+        maxY: screenY,
+        x: -6.6
+      }
+    } else if (this.player === 'right') {
+      return {
+        minY: screenY - 1.5,
+        maxY: screenY,
+        x: 6.6
+      }
+    }
   }
 
   checkCollision (newY) {
