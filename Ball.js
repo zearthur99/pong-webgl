@@ -1,16 +1,12 @@
 export default class Ball {
 
-  maxYDistance = 4.2;
-  minYDistance = -4.2;
-  maxXDistance = 7;
-  minXDistance = -7;
-  xIncrementPerTick = 0;
-  yIncrementPerTick = 0;
-  posX;
-  posY;
-
-
   initBall() {
+    this.maxYDistance = 4.2;
+    this.minYDistance = -4.2;
+    this.maxXDistance = 7;
+    this.minXDistance = -7;
+    this.xIncrementPerTick = 0;
+    this.yIncrementPerTick = 0;
     this.posX=0;
     this.posY=0;
     // 0 represents middle of the screen

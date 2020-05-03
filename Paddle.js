@@ -1,8 +1,8 @@
 export default class Paddle {
 
-  maxYDistance = 3.5;
-
   initPaddle(player) {
+    this.maxYDistance = 3.5;
+
     this.y=0; // 0 represents middle of the screen
     this.player = player;
 

@@ -4,10 +4,12 @@ import Ball from "./Ball.js";
 
 export default class Game {
 
-  leftScore = 0;
-  rightScore = 0;
+
 
   initGame() {
+    this.leftScore = 0;
+    this.rightScore = 0;
+
     this.renderer = new Renderer();
     this.renderer.initGL();
     let game = this;
