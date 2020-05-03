@@ -1,4 +1,6 @@
-
+* {
+   touch-action: none;
+}
 body {
    background-color: black;
    font-family: 'Press Start 2P', cursive;
@@ -101,7 +103,6 @@ button {
    text-align: center;
    border-radius: 50%;
    font-size: 22px;
-   touch-action: manipulation;
 }
 
 .contentContainer {
