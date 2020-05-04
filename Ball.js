@@ -12,8 +12,8 @@ export default class Ball {
     // 0 represents middle of the screen
     let inverseX = Math.random() >= 0.5;
     let inverseY = Math.random() >= 0.5;
-    this.xIncrementPerTick = (Math.random() * (0.06 - 0.04) + 0.04) * (inverseX ? -1 : 1);
-    this.yIncrementPerTick = (Math.random() * (0.04 - 0.03) + 0.03) * (inverseX ? -1 : 1);
+    this.xIncrementPerTick = (Math.random() * (0.075 - 0.06) + 0.06) * (inverseX ? -1 : 1);
+    this.yIncrementPerTick = (Math.random() * (0.06 - 0.04) + 0.04) * (inverseX ? -1 : 1);
   }
 
   getPosition() {

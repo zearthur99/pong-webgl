@@ -4,8 +4,6 @@ import Ball from "./Ball.js";
 
 export default class Game {
 
-
-
   initGame() {
     this.leftScore = 0;
     this.rightScore = 0;
@@ -31,9 +29,22 @@ export default class Game {
     this.ball.setGameReference(this);
     this.renderer.setBall(this.ball);
 
-    this.gameLoop = setInterval(() => {
-      game.processTick();
-    }, 1000 /60);
+    let startCountdown = 10;
+    let topText = "Starting game in " + startCountdown + " seconds";
+    document.getElementById("topText").innerHTML = topText;
+
+    this.countdown = setInterval(() => {
+      startCountdown--;
+      topText = "Starting game in " + startCountdown + " seconds";
+      if (startCountdown < 1) {
+        topText = "First to score 5 points wins";
+        clearInterval(this.countdown);
+        this.gameLoop = setInterval(() => {
+          game.processTick();
+        }, 1000 /60);
+      }
+      document.getElementById("topText").innerHTML = topText;
+    }, 1000);
   }
 
   processTick () {
@@ -48,16 +59,18 @@ export default class Game {
   }
 
   addRightScore () {
-    this.leftScore++;
-    this.checkEndOfGame();
-  }
-
-  addLeftScore() {
     this.rightScore++;
     this.checkEndOfGame();
   }
 
+  addLeftScore() {
+    this.leftScore++;
+    this.checkEndOfGame();
+  }
+
   checkEndOfGame() {
+    this.leftPaddle.resetPaddle();
+    this.rightPaddle.resetPaddle();
     document.getElementById('rightScore').innerHTML = this.rightScore;
     document.getElementById('leftScore').innerHTML = this.leftScore;
     if (this.leftScore > 4 || this.rightScore > 4) {

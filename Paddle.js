@@ -64,6 +64,10 @@ export default class Paddle {
     }
   }
 
+  resetPaddle () {
+    this.y=0;
+  }
+
   getYPosition() {
     return this.y;
   }
