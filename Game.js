@@ -74,8 +74,8 @@ export default class Game {
     document.getElementById('rightScore').innerHTML = this.rightScore;
     document.getElementById('leftScore').innerHTML = this.leftScore;
     if (this.leftScore > 4 || this.rightScore > 4) {
-      document.getElementById('gameOver').style.display = 'block';
-      clearInterval(this.gameLoop);
+      //document.getElementById('gameOver').style.display = 'block';
+      //clearInterval(this.gameLoop);
     }
   }
 }

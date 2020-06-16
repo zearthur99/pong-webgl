@@ -1,6 +1,9 @@
 export default class Renderer {
 
   initGL(){
+    document.addEventListener("keydown", () => {
+      this.amountOfPoints = 1;
+    })
     this.amountOfPoints = 1;
     this.canvas = document.getElementById("gameCanvas");
     this.gl = this.canvas.getContext("webgl") || this.canvas.getContext("experimental-webgl");
@@ -204,16 +207,12 @@ export default class Renderer {
     let result2 = 0;
     let n = p.length-1;
 
-    console.log(p);
-
     for(let i = 0; i < p.length; i++){
 
       if(i === 0 || i === n){
-        console.log(1)
         result1 = result1 + Math.pow((1-t), (n - i)) * Math.pow(t, i) * p[i].x;
         result2 = result2 + Math.pow((1-t), (n - i)) * Math.pow(t, i) * p[i].y;
       }else{
-        console.log(2)
         result1 = result1 + Math.pow((1-t), (n - i)) * (Math.pow(t, i) * n)* p[i].x;
         result2 = result2 + Math.pow((1-t), (n - i)) * (Math.pow(t, i) * n) * p[i].y;
       }
@@ -229,10 +228,10 @@ export default class Renderer {
       this.amountOfPoints += 0.05;
     }
     let ctrlP = [
-      {x: 0, y: 0},
-      {x: 1, y: 1},
-      {x: 2, y: 0},
-      {x: 3, y: 1}
+      {x: document.getElementById("x1").value, y: document.getElementById("y1").value},
+      {x: document.getElementById("x2").value, y: document.getElementById("y2").value},
+      {x: document.getElementById("x3").value, y: document.getElementById("y3").value},
+      {x: document.getElementById("x4").value, y: document.getElementById("y4").value},
     ];
     let t, t1;
     let roundedAmountOfPoints = Math.round(this.amountOfPoints);
