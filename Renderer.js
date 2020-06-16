@@ -112,6 +112,7 @@ export default class Renderer {
 
     this.drawPaddles();
     this.drawBall();
+    this.drawBezier();
   }
 
   drawPaddles() {
@@ -160,6 +161,31 @@ export default class Renderer {
     this.gl.enableVertexAttribArray(this.programInfo.attribLocations.vertexPosition);
   }
 
+  setLine(x1, y1, x2, y2) {
+    const positionBuffer = this.gl.createBuffer();
+    this.gl.bindBuffer(this.gl.ARRAY_BUFFER, positionBuffer);
+
+    const positions = [
+      x1,  y1,
+      x2,  y2,
+    ];
+
+    this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(positions), this.gl.STATIC_DRAW);
+    let numComponents = 2;
+    let type = this.gl.FLOAT;
+    let normalize = false;
+    let stride = 0;
+    let offset = 0;
+    this.gl.vertexAttribPointer(
+      this.programInfo.attribLocations.vertexPosition,
+      numComponents,
+      type,
+      normalize,
+      stride,
+      offset);
+    this.gl.enableVertexAttribArray(this.programInfo.attribLocations.vertexPosition);
+  }
+
   setLeftPaddle(leftPaddle) {
     this.leftPaddle = leftPaddle;
   }
@@ -170,5 +196,10 @@ export default class Renderer {
 
   setBall (ball) {
     this.ball = ball;
+  }
+
+  drawBezier() {
+    this.setLine(0,1,3,1);
+    this.gl.drawArrays(this.gl.LINE_STRIP, 0, 2);
   }
 }

@@ -29,7 +29,7 @@ export default class Game {
     this.ball.setGameReference(this);
     this.renderer.setBall(this.ball);
 
-    let startCountdown = 10;
+    let startCountdown = 0;
     let topText = "Starting game in " + startCountdown + " seconds";
     document.getElementById("topText").innerHTML = topText;
 
