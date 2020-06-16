@@ -1,6 +1,7 @@
 export default class Renderer {
 
   initGL(){
+    this.amountOfPoints = 1;
     this.canvas = document.getElementById("gameCanvas");
     this.gl = this.canvas.getContext("webgl") || this.canvas.getContext("experimental-webgl");
     this.gl.viewportWidth = this.canvas.width;
@@ -198,8 +199,51 @@ export default class Renderer {
     this.ball = ball;
   }
 
+  getpoint(p, t) {
+    let result1 = 0;
+    let result2 = 0;
+    let n = p.length-1;
+
+    console.log(p);
+
+    for(let i = 0; i < p.length; i++){
+
+      if(i === 0 || i === n){
+        console.log(1)
+        result1 = result1 + Math.pow((1-t), (n - i)) * Math.pow(t, i) * p[i].x;
+        result2 = result2 + Math.pow((1-t), (n - i)) * Math.pow(t, i) * p[i].y;
+      }else{
+        console.log(2)
+        result1 = result1 + Math.pow((1-t), (n - i)) * (Math.pow(t, i) * n)* p[i].x;
+        result2 = result2 + Math.pow((1-t), (n - i)) * (Math.pow(t, i) * n) * p[i].y;
+      }
+
+    }
+    return {x: result1, y: result2}
+
+  }
+
+
   drawBezier() {
-    this.setLine(0,1,3,1);
-    this.gl.drawArrays(this.gl.LINE_STRIP, 0, 2);
+    if (this.amountOfPoints < 100) {
+      this.amountOfPoints += 0.05;
+    }
+    let ctrlP = [
+      {x: 0, y: 0},
+      {x: 1, y: 1},
+      {x: 2, y: 0},
+      {x: 3, y: 1}
+    ];
+    let t, t1;
+    let roundedAmountOfPoints = Math.round(this.amountOfPoints);
+
+    for (let i = 0; i < roundedAmountOfPoints; i++) {
+      t = i / roundedAmountOfPoints;
+      t1 = (i + 1) / roundedAmountOfPoints;
+      let {x: px1, y: py1} = this.getpoint(ctrlP, t);
+      let {x: px2, y: py2} = this.getpoint(ctrlP, t1);
+      this.setLine(px1,py1,px2,py2);
+      this.gl.drawArrays(this.gl.LINE_STRIP, 0, 2);
+    }
   }
 }
